@@ -1,8 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: "export",
+  output: "export",     // tells Next.js to generate static site
   images: {
-    unoptimized: true,
+    unoptimized: true,  // required for static hosting
   },
 };
 
