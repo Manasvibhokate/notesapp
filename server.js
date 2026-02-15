@@ -8,12 +8,12 @@ app.use(express.json());
 
 const FILE = "notes.json";
 
-/* ---------------- HEALTH CHECK ROUTE ---------------- */
+/* ---------- IMPORTANT ROOT ROUTE ---------- */
 app.get("/", (req, res) => {
   res.send("Notes API is running 🚀");
 });
 
-/* ---------------- FILE FUNCTIONS ---------------- */
+/* ---------- helpers ---------- */
 const readNotes = () => {
   if (!fs.existsSync(FILE)) return [];
   return JSON.parse(fs.readFileSync(FILE));
@@ -23,41 +23,30 @@ const writeNotes = (data) => {
   fs.writeFileSync(FILE, JSON.stringify(data, null, 2));
 };
 
-/* ---------------- ROUTES ---------------- */
-
-// GET all notes
+/* ---------- routes ---------- */
 app.get("/api/notes", (req, res) => {
   res.json(readNotes());
 });
 
-// ADD note
 app.post("/api/notes", (req, res) => {
   const notes = readNotes();
-
   const newNote = {
     id: Date.now(),
     title: req.body.title,
-    content: req.body.content
+    content: req.body.content,
   };
-
   notes.push(newNote);
   writeNotes(notes);
-
   res.json(newNote);
 });
 
-// DELETE note
 app.delete("/api/notes/:id", (req, res) => {
   let notes = readNotes();
-  notes = notes.filter(n => n.id != req.params.id);
+  notes = notes.filter((n) => n.id != req.params.id);
   writeNotes(notes);
-
   res.json({ message: "Deleted" });
 });
 
-/* ---------------- IMPORTANT PART ---------------- */
+/* ---------- PORT FIX FOR RENDER ---------- */
 const PORT = process.env.PORT || 5000;
-
-app.listen(PORT, () => {
-  console.log("Server running on port " + PORT);
-});
+app.listen(PORT, () => console.log("Server running on port " + PORT));
