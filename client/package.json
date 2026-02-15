@@ -1,13 +1,16 @@
 {
-  "name": "notes-frontend",
+  "name": "client",
   "version": "0.1.0",
   "private": true,
+
+  "engines": {
+    "node": "18.x"
+  },
 
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
-    "lint": "eslint"
+    "start": "next start"
   },
 
   "dependencies": {
@@ -17,11 +20,15 @@
   },
 
   "devDependencies": {
+    "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "autoprefixer": "^10.4.24",
     "eslint": "^9",
     "eslint-config-next": "16.1.6",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^3.4.14",
     "typescript": "^5"
   }
 }
