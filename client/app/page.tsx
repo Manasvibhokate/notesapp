@@ -1,12 +1,12 @@
 "use client";
 import { useState, useEffect } from "react";
 
+const API = "https://notes-api-6ckc.onrender.com/api/notes";
+
 export default function Home() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [notes, setNotes] = useState<any[]>([]);
-
-  const API = "http://localhost:5000/api/notes";
 
   // Fetch notes
   const fetchNotes = async () => {
@@ -21,6 +21,8 @@ export default function Home() {
 
   // Add note
   const addNote = async () => {
+    if (!title || !content) return;
+
     await fetch(API, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -33,7 +35,7 @@ export default function Home() {
   };
 
   // Delete note
-  const deleteNote = async (id: string) => {
+  const deleteNote = async (id: number) => {
     await fetch(`${API}/${id}`, { method: "DELETE" });
     fetchNotes();
   };
