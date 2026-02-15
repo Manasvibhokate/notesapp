@@ -1,7 +1,7 @@
 {
   "name": "notes-api",
   "version": "1.0.0",
-  "description": "Backend API for Smart Notes Manager",
+  "description": "Notes Manager Backend",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
